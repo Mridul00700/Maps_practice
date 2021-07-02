@@ -14,6 +14,62 @@ const inputElevation = document.querySelector('.form__input--elevation');
 //  OOP Implementation...
 // Implementing App Class...>>>
 
+
+// Child Classes ---->>>>>
+
+class Workout {
+
+    date = new Date();
+    // new unique ID
+    id = (Date.now() + "").slice(-10);
+
+    constructor(coords, distance, duration) {
+        this.coords = coords;  // [] of coordinated [lat, lng]
+        this.distance = distance;
+        this.duration = duration
+    }
+}
+
+class Running extends Workout {
+    constructor(coords, distance, duration, cadence) {
+        super(coords, distance, duration);
+        this.cadence = cadence;
+        this.calcPace();
+    }
+
+    calcPace() {
+        // min/km = pace = time(min) / distance (km)
+        this.pace = this.duration / this.distance;
+        return this.pace;
+    }
+}
+class CyCling extends Workout {
+    constructor(coords, distance, duration, elevationGain) {
+        super(coords, distance, duration);
+        this.elevationGain = elevationGain;
+        this.calcSpeed();
+    }
+    calcSpeed() {
+        //  Km / Hr
+        this.speed = (this.distance) / (this.duration / 60);
+        return this.speed;
+    }
+
+}
+
+// Sample - Example-->
+// const run1 = new Running([23, 45], 20, 75, 190);
+// const cycle1 = new CyCling([22, 43], 45, 145, 1023);
+
+// console.log(run1);
+// console.log(cycle1);
+
+
+
+
+// /////////////////////////////////////////////
+//  Application architechture -->>>
+
 class App {
 
     // Private Instance Property....
@@ -83,12 +139,6 @@ class App {
             .setPopupContent("Workout").openPopup();
     }
 }
-
-
-// Child Classes ---->>>>>
-
-
-
 
 
 
