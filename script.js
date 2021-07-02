@@ -29,8 +29,6 @@ if (navigator.geolocation)
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-
-
         // console.log(map); Handling clicks on map
         map.on('click', function (mapE) {
             mapEvent = mapE;
@@ -67,3 +65,4 @@ inputType.addEventListener('change', function () {
 });
 
 //  OOP Implementation...
+// Implementing App Class...>>>
