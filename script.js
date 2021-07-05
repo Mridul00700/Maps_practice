@@ -3,14 +3,6 @@
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const form = document.querySelector('.form');
-const containerWorkouts = document.querySelector('.workouts');
-const inputType = document.querySelector('.form__input--type');
-const inputDistance = document.querySelector('.form__input--distance');
-const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
-const inputElevation = document.querySelector('.form__input--elevation');
-
 //  OOP Implementation...
 // Implementing App Class...>>>
 
@@ -70,6 +62,16 @@ class CyCling extends Workout {
 // /////////////////////////////////////////////
 //  Application architechture -->>>
 
+
+const form = document.querySelector('.form');
+const containerWorkouts = document.querySelector('.workouts');
+const inputType = document.querySelector('.form__input--type');
+const inputDistance = document.querySelector('.form__input--distance');
+const inputDuration = document.querySelector('.form__input--duration');
+const inputCadence = document.querySelector('.form__input--cadence');
+const inputElevation = document.querySelector('.form__input--elevation');
+
+
 class App {
 
     // Private Instance Property....
@@ -127,6 +129,12 @@ class App {
     _newWorkOut(e) {
         e.preventDefault();
 
+
+        const validators = (...inputs) =>
+            inputs.every(inp => Number.isFinite(inp));
+
+
+
         // Steps --> 
         /* Get data from form
         Check if data is valid 
@@ -134,11 +142,19 @@ class App {
         Add new object to workout array 
         then render the workout on the map and also on the list 
         hide the form and clear the input fields..
-        
+
         */
+        const type = inputType.value;
+        const distance = +inputDistance.value;
+        const duration = +inputDuration.value;
 
-
-
+        if (type === "running") {
+            const cadence = +inputCadence.value;
+            if (!validators(distance, duration, cadence)) return alert("Input has to be positive number!");
+        } else {
+            const elevation = +inputElevation.value;
+            if (!validators(distance, duration, elevation)) return alert("Input has to be positive number!");
+        }
 
 
         // Clear Input fields 
