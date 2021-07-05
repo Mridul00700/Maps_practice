@@ -77,7 +77,7 @@ class App {
     // Private Instance Property....
     #map;
     #mapEvent;
-
+    #workouts = [];
 
     constructor() {
         this._getPosition();
@@ -129,9 +129,11 @@ class App {
     _newWorkOut(e) {
         e.preventDefault();
 
-
+        const { lat, lng } = this.#mapEvent.latlng;
         const validators = (...inputs) =>
             inputs.every(inp => Number.isFinite(inp));
+
+        const allPositives = (...inputs) => inputs.every(inp => inp > 0);
 
 
 
@@ -150,19 +152,24 @@ class App {
 
         if (type === "running") {
             const cadence = +inputCadence.value;
-            if (!validators(distance, duration, cadence)) return alert("Input has to be positive number!");
+            if (!validators(distance, duration, cadence) || !allPositives(distance, duration, cadence)) return alert("Input has to be positive number!");
+
+            const workout = new Running([lat, lng], distance, duration, cadence);
+            this.#workouts.push(workout);
         } else {
             const elevation = +inputElevation.value;
-            if (!validators(distance, duration, elevation)) return alert("Input has to be positive number!");
-        }
+            if (!validators(distance, duration, elevation) || !allPositives(distance, duration)) return alert("Input has to be positive number!");
 
+            const workout = new CyCling([lat, lng], distance, duration, elevation);
+            this.#workouts.push(workout);
+        }
 
         // Clear Input fields 
         inputDistance.value = inputDuration.value = inputElevation.value = inputCadence.value = "";
 
         // Submit the marker
         // console.log(mapEvent);
-        const { lat, lng } = this.#mapEvent.latlng;
+
         // All the methods return this hence chainable...
         L.marker([lat, lng]).addTo(this.#map)
             .bindPopup(L.popup({ maxWidth: 250, minWidth: 100, autoClose: false, closeOnClick: false, className: 'running-popup' }))
