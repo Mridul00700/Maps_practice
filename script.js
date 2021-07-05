@@ -87,7 +87,7 @@ class App {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), function () {
                 alert("Could not get your position");
-            })
+            });
         }
     }
 
@@ -127,6 +127,20 @@ class App {
     _newWorkOut(e) {
         e.preventDefault();
 
+        // Steps --> 
+        /* Get data from form
+        Check if data is valid 
+        if activity is running / cycling then create running object / cycling object repectively..
+        Add new object to workout array 
+        then render the workout on the map and also on the list 
+        hide the form and clear the input fields..
+        
+        */
+
+
+
+
+
         // Clear Input fields 
         inputDistance.value = inputDuration.value = inputElevation.value = inputCadence.value = "";
 
@@ -139,11 +153,6 @@ class App {
             .setPopupContent("Workout").openPopup();
     }
 }
-
-
-
-
-
 
 
 // Object ---->>
