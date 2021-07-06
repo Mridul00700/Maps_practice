@@ -169,7 +169,9 @@ class App {
         this.#workouts.push(workout);
 
         // console.log(this.#workouts);
-        this.renderWorkoutMarker(workout);
+        this._renderWorkoutMarker(workout);
+
+        this._renderWorkout(workout);
 
         // Clear Input fields 
         inputDistance.value = inputDuration.value = inputElevation.value = inputCadence.value = "";
@@ -181,12 +183,17 @@ class App {
 
     }
 
-    renderWorkoutMarker = (workout) => {
+    _renderWorkoutMarker = (workout) => {
         L.marker(workout.coords).addTo(this.#map)
             .bindPopup(L.popup({ maxWidth: 250, minWidth: 100, autoClose: false, closeOnClick: false, className: `${workout.type}-popup` }))
             .setPopupContent(`${workout.type}`).openPopup();
 
     }
+
+    _renderWorkout(workout) {
+
+    }
+
 }
 
 
