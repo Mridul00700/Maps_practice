@@ -131,6 +131,14 @@ class App {
         inputDistance.focus();
     }
 
+    _hideForm() {
+        // Empty input
+        inputDistance.value = inputDuration.value = inputElevation.value = inputCadence.value = "";
+        form.style.display = 'none';
+        form.classList.add('hidden');
+        setTimeout(() => form.style.display = 'grid', 1000);
+    }
+
     _toggleElevationField() {
 
         inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
@@ -184,7 +192,8 @@ class App {
         this._renderWorkout(workout);
 
         // Clear Input fields 
-        inputDistance.value = inputDuration.value = inputElevation.value = inputCadence.value = "";
+        this._hideForm();
+
 
         // Submit the marker
         // console.log(mapEvent);
