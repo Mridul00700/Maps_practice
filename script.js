@@ -205,7 +205,7 @@ class App {
     _renderWorkoutMarker = (workout) => {
         L.marker(workout.coords).addTo(this.#map)
             .bindPopup(L.popup({ maxWidth: 250, minWidth: 100, autoClose: false, closeOnClick: false, className: `${workout.type}-popup` }))
-            .setPopupContent(`${workout.type}`).openPopup();
+            .setPopupContent(`${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`).openPopup();
 
     }
 
