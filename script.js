@@ -200,6 +200,8 @@ class App {
         // Clear Input fields 
         this._hideForm();
 
+        // Setting local storage..
+        this._setLocalStorage();
 
         // Submit the marker
         // console.log(mapEvent);
@@ -281,6 +283,13 @@ class App {
         // using public interface;
         workout.click();
     }
+
+    _setLocalStorage() {
+        // Convert Object to string.... JSON.stringify
+        localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    }
+
+
 }
 
 
