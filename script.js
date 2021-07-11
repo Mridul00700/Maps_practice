@@ -95,7 +95,7 @@ class App {
         this._getPosition();
         form.addEventListener('submit', this._newWorkOut.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
-        containerWorkouts.addEventListener('click', this._moveToPopup);
+        containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
     }
 
     _getPosition() {
@@ -261,6 +261,11 @@ class App {
     _moveToPopup(e) {
         const workoutEl = e.target.closest('.workout');
         console.log(workoutEl);
+        if (!workoutEl) return;
+
+        const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+        console.log(workout);
+
     }
 }
 
