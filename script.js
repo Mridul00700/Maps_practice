@@ -124,10 +124,10 @@ class App {
         const { latitude } = position.coords;
         const { longitude } = position.coords;
         // console.log(latitude, longitude);
-        console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+        // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
         const coords = [latitude, longitude];
-        console.log(this);
+        // console.log(this);
         this.#map = L.map('map').setView(coords, this.#mapZoomLvl);
 
         L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -278,11 +278,11 @@ class App {
 
     _moveToPopup(e) {
         const workoutEl = e.target.closest('.workout');
-        console.log(workoutEl);
+        // console.log(workoutEl);
         if (!workoutEl) return;
 
         const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
-        console.log(workout);
+        // console.log(workout);
         // Its leaplet's function to center map to a particular place
         this.#map.setView(workout.coords, this.#mapZoomLvl, {
             animate: true,
@@ -292,7 +292,7 @@ class App {
         });
 
         // using public interface;
-        workout.click();
+        // workout.click();
     }
 
     _setLocalStorage() {
@@ -308,6 +308,12 @@ class App {
         this.#workouts = data;
 
         this.#workouts.forEach(workout => this._renderWorkout(workout))
+    }
+
+    reset() {
+        localStorage.removeItem('workouts');
+        // Reload the application Programtically...
+        location.reload();
     }
 
 }
