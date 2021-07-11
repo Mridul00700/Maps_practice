@@ -88,6 +88,7 @@ class App {
 
     // Private Instance Property....
     #map;
+    #mapZoomLvl = 13;
     #mapEvent;
     #workouts = [];
 
@@ -116,7 +117,7 @@ class App {
 
         const coords = [latitude, longitude];
         console.log(this);
-        this.#map = L.map('map').setView(coords, 13);
+        this.#map = L.map('map').setView(coords, this.#mapZoomLvl);
 
         L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -265,6 +266,13 @@ class App {
 
         const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
         console.log(workout);
+        // Its leaplet's function to center map to a particular place
+        this.#map.setView(workout.coords, this.#mapZoomLvl, {
+            animate: true,
+            pan: {
+                duration: 1
+            }
+        });
 
     }
 }
