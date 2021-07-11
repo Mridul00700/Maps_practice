@@ -97,7 +97,14 @@ class App {
     #workouts = [];
 
     constructor() {
+
+        // Get Users Positions
         this._getPosition();
+
+        // Get data from local storage
+        this._getLocalStorage();
+
+        // Attach Event Handlers
         form.addEventListener('submit', this._newWorkOut.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
         containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -287,6 +294,16 @@ class App {
     _setLocalStorage() {
         // Convert Object to string.... JSON.stringify
         localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    }
+
+    _getLocalStorage() {
+        // Convert String to Object
+        const data = JSON.parse(localStorage.getItem('workouts'));
+        if (!data) return
+
+        this.#workouts = data;
+
+        this.#workouts.forEach(workout => this._renderWorkout(workout))
     }
 
 
